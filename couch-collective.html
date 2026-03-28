@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Couch Collective — A Private Membership</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green:   #2C4A3E;
+      --green-dk:#1e3329;
+      --terra:   #B5603A;
+      --blush:   #E8C4B0;
+      --cream:   #FAF6F1;
+      --taupe:   #C8B9A8;
+      --warm:    #F2EAE0;
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-body:    'Jost', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--cream);
+      color: var(--green-dk);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ─────────────────────────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.2rem 3rem;
+      background: rgba(250,246,241,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(200,185,168,0.3);
+    }
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 400;
+      color: var(--green);
+      letter-spacing: 0.02em;
+    }
+    .nav-logo span { color: var(--terra); }
+    .nav-pill {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--cream);
+      background: var(--terra);
+      padding: 0.55rem 1.4rem;
+      border-radius: 2rem;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .nav-pill:hover { background: var(--green); }
+
+    /* ── HERO ─────────────────────────────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      background: var(--green);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-texture {
+      position: absolute; inset: 0;
+      background-image:
+        radial-gradient(ellipse 60% 50% at 75% 50%, rgba(181,96,58,0.12) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 60% at 20% 80%, rgba(232,196,176,0.06) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .hero-left {
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 9rem 4rem 6rem 5rem;
+      position: relative; z-index: 2;
+    }
+    .hero-eyebrow {
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--terra);
+      margin-bottom: 1.8rem;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(181,96,58,0.18);
+      border: 1px solid rgba(181,96,58,0.35);
+      border-radius: 2rem;
+      padding: 0.4rem 1rem;
+      width: fit-content;
+      margin-bottom: 1.8rem;
+    }
+    .hero-badge-dot {
+      width: 7px; height: 7px;
+      background: var(--terra);
+      border-radius: 50%;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+    .hero-badge span {
+      font-size: 0.68rem; font-weight: 500; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--blush);
+    }
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 5.5vw, 5.5rem);
+      font-weight: 300;
+      line-height: 1.05;
+      color: var(--cream);
+      margin-bottom: 1.5rem;
+    }
+    .hero-title em { font-style: italic; color: var(--blush); }
+    .hero-sub {
+      font-size: 1rem;
+      font-weight: 300;
+      line-height: 1.75;
+      color: rgba(250,246,241,0.7);
+      max-width: 38ch;
+      margin-bottom: 3rem;
+    }
+    .hero-actions {
+      display: flex; gap: 1rem; flex-wrap: wrap;
+    }
+    .btn-primary {
+      font-size: 0.72rem; font-weight: 500; letter-spacing: 0.12em;
+      text-transform: uppercase; text-decoration: none;
+      background: var(--terra); color: var(--cream);
+      padding: 0.9rem 2.2rem; border-radius: 2rem;
+      transition: background 0.2s, transform 0.2s;
+      display: inline-block;
+    }
+    .btn-primary:hover { background: #c96b42; transform: translateY(-1px); }
+    .btn-ghost {
+      font-size: 0.72rem; font-weight: 500; letter-spacing: 0.12em;
+      text-transform: uppercase; text-decoration: none;
+      border: 1px solid rgba(250,246,241,0.3); color: var(--cream);
+      padding: 0.9rem 2.2rem; border-radius: 2rem;
+      transition: border-color 0.2s, background 0.2s;
+      display: inline-block;
+    }
+    .btn-ghost:hover { border-color: var(--blush); background: rgba(232,196,176,0.08); }
+    .hero-right {
+      position: relative; overflow: hidden;
+    }
+    .hero-right-fill {
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(135deg, rgba(44,74,62,0.4) 0%, transparent 50%),
+        linear-gradient(to bottom, var(--green), rgba(44,74,62,0.7));
+      z-index: 1;
+    }
+    .hero-right-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(circle at 60% 40%, rgba(232,196,176,0.15) 0%, transparent 55%),
+        var(--green-dk);
+    }
+    .hero-ornament {
+      position: absolute; z-index: 2;
+      top: 50%; left: 50%; transform: translate(-50%, -50%);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .hero-ring {
+      width: 320px; height: 320px;
+      border: 1px solid rgba(232,196,176,0.2);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+    }
+    .hero-ring::before {
+      content: '';
+      position: absolute; inset: 20px;
+      border: 1px solid rgba(181,96,58,0.2);
+      border-radius: 50%;
+    }
+    .hero-ring-text {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--blush);
+      text-align: center;
+      line-height: 1.6;
+      padding: 2rem;
+    }
+    .hero-ring-text strong {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 2.8rem;
+      font-weight: 300;
+      font-style: normal;
+      color: var(--cream);
+      margin-bottom: 0.3rem;
+    }
+    .hero-stats {
+      position: absolute; bottom: 3rem; left: 3rem;
+      z-index: 3;
+      display: flex; gap: 2rem;
+    }
+    .hero-stat {
+      text-align: center;
+    }
+    .hero-stat-num {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 300;
+      color: var(--cream);
+      display: block;
+    }
+    .hero-stat-label {
+      font-size: 0.62rem;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(250,246,241,0.5);
+    }
+
+    /* ── SECTION SCAFFOLD ─────────────────────────────────────────────── */
+    section { padding: 6rem 0; }
+    .container { max-width: 1140px; margin: 0 auto; padding: 0 2.5rem; }
+    .section-label {
+      font-size: 0.65rem; font-weight: 500; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--terra);
+      margin-bottom: 1rem; display: block;
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 300; line-height: 1.2;
+      color: var(--green);
+      margin-bottom: 1.5rem;
+    }
+    .section-title em { font-style: italic; color: var(--terra); }
+    .section-body {
+      font-size: 1rem; font-weight: 300; line-height: 1.8;
+      color: #4a5a52; max-width: 58ch;
+    }
+    .divider {
+      width: 48px; height: 2px;
+      background: var(--terra); border-radius: 1px;
+      margin-bottom: 2rem;
+    }
+
+    /* ── WHAT THIS IS ─────────────────────────────────────────────────── */
+    .what-inner {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center;
+    }
+    .what-visual {
+      position: relative; height: 480px;
+    }
+    .what-card {
+      position: absolute;
+      background: var(--green);
+      border-radius: 4px;
+      padding: 2.5rem;
+    }
+    .what-card-main {
+      inset: 0 10% 10% 0;
+    }
+    .what-card-accent {
+      bottom: 0; right: 0; left: 20%;
+      top: 60%;
+      background: var(--terra);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .what-card-quote {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-style: italic;
+      font-weight: 300;
+      color: var(--cream);
+      line-height: 1.5;
+    }
+    .what-card-accent-text {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-style: italic;
+      color: var(--cream);
+      text-align: center;
+      line-height: 1.6;
+    }
+    .what-emphasis {
+      margin-top: 1.5rem;
+      font-size: 0.95rem; font-weight: 300; line-height: 1.8;
+      color: rgba(250,246,241,0.75);
+    }
+
+    /* ── WHO THIS IS FOR ──────────────────────────────────────────────── */
+    .who { background: var(--warm); }
+    .who-inner {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start;
+    }
+    .who-list { list-style: none; margin-top: 2rem; }
+    .who-list li {
+      display: flex; align-items: flex-start; gap: 1rem;
+      padding: 1.2rem 0;
+      border-bottom: 1px solid rgba(200,185,168,0.4);
+    }
+    .who-list li:last-child { border-bottom: none; }
+    .who-mark {
+      width: 28px; height: 28px; flex-shrink: 0;
+      border-radius: 50%; border: 1px solid var(--terra);
+      display: flex; align-items: center; justify-content: center;
+      margin-top: 0.1rem;
+    }
+    .who-mark svg { width: 12px; height: 12px; stroke: var(--terra); fill: none; stroke-width: 2; }
+    .who-list-text {
+      font-size: 0.95rem; font-weight: 300; line-height: 1.6; color: #4a5a52;
+    }
+    .who-callout {
+      background: var(--green); border-radius: 4px; padding: 3rem;
+      position: sticky; top: 7rem;
+    }
+    .who-callout-title {
+      font-family: var(--font-display); font-size: 1.8rem;
+      font-weight: 300; font-style: italic;
+      color: var(--cream); line-height: 1.3; margin-bottom: 1.5rem;
+    }
+    .who-callout-body {
+      font-size: 0.9rem; font-weight: 300; line-height: 1.8;
+      color: rgba(250,246,241,0.7); margin-bottom: 2rem;
+    }
+    .spots-indicator {
+      display: flex; gap: 0.4rem; margin-bottom: 0.6rem; flex-wrap: wrap;
+    }
+    .spot {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--terra);
+    }
+    .spot.open { background: rgba(250,246,241,0.2); border: 1px solid rgba(250,246,241,0.3); }
+    .spots-label {
+      font-size: 0.68rem; font-weight: 400; letter-spacing: 0.1em;
+      text-transform: uppercase; color: rgba(250,246,241,0.5);
+    }
+
+    /* ── BENEFITS ─────────────────────────────────────────────────────── */
+    .benefits-header { margin-bottom: 4rem; }
+    .benefits-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px;
+      background: var(--taupe);
+      border: 2px solid var(--taupe);
+      border-radius: 6px; overflow: hidden;
+    }
+    .benefit-group {
+      background: var(--cream); padding: 2.5rem;
+    }
+    .benefit-group-label {
+      font-size: 0.62rem; font-weight: 500; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--terra);
+      margin-bottom: 1.5rem; display: block;
+    }
+    .benefit-group-title {
+      font-family: var(--font-display); font-size: 1.4rem;
+      font-weight: 400; color: var(--green);
+      margin-bottom: 1.2rem;
+    }
+    .benefit-items { list-style: none; }
+    .benefit-items li {
+      font-size: 0.9rem; font-weight: 300; line-height: 1.6;
+      color: #4a5a52; padding: 0.5rem 0;
+      border-bottom: 1px solid rgba(200,185,168,0.3);
+      display: flex; align-items: center; gap: 0.75rem;
+    }
+    .benefit-items li:last-child { border-bottom: none; }
+    .benefit-items li::before {
+      content: '';
+      width: 5px; height: 5px; flex-shrink: 0;
+      border-radius: 50%; background: var(--terra);
+    }
+    .benefit-group.accent { background: var(--green); }
+    .benefit-group.accent .benefit-group-label { color: var(--blush); opacity: 0.8; }
+    .benefit-group.accent .benefit-group-title { color: var(--cream); }
+    .benefit-group.accent .benefit-items li { color: rgba(250,246,241,0.75); border-color: rgba(200,185,168,0.15); }
+    .benefit-group.accent .benefit-items li::before { background: var(--blush); }
+
+    /* ── FOUNDING MEMBER ──────────────────────────────────────────────── */
+    .founding { background: var(--green); }
+    .founding-inner {
+      display: grid; grid-template-columns: 1.2fr 1fr; gap: 6rem; align-items: center;
+    }
+    .founding .section-title { color: var(--cream); }
+    .founding .section-label { color: var(--blush); opacity: 0.8; }
+    .founding .divider { background: var(--blush); }
+    .founding-body {
+      font-size: 1rem; font-weight: 300; line-height: 1.8;
+      color: rgba(250,246,241,0.7); margin-bottom: 1.5rem;
+    }
+    .founding-detail {
+      font-size: 0.88rem; font-weight: 300; font-style: italic;
+      color: rgba(232,196,176,0.8); line-height: 1.8;
+    }
+    .founding-card {
+      background: rgba(250,246,241,0.06);
+      border: 1px solid rgba(250,246,241,0.12);
+      border-radius: 4px; padding: 3rem;
+    }
+    .founding-price {
+      font-family: var(--font-display); font-size: 4rem;
+      font-weight: 300; color: var(--cream);
+      line-height: 1; margin-bottom: 0.3rem;
+    }
+    .founding-price sub {
+      font-size: 1.5rem; vertical-align: super;
+      color: var(--blush);
+    }
+    .founding-price-label {
+      font-size: 0.7rem; letter-spacing: 0.15em;
+      text-transform: uppercase; color: rgba(250,246,241,0.4);
+      margin-bottom: 2rem;
+    }
+    .founding-perks { list-style: none; }
+    .founding-perks li {
+      font-size: 0.88rem; font-weight: 300; line-height: 1.6;
+      color: rgba(250,246,241,0.7);
+      padding: 0.75rem 0;
+      border-bottom: 1px solid rgba(250,246,241,0.08);
+      display: flex; align-items: center; gap: 0.75rem;
+    }
+    .founding-perks li:last-child { border-bottom: none; }
+    .founding-perks li::before {
+      content: '';
+      width: 5px; height: 5px; flex-shrink: 0;
+      border-radius: 50%; background: var(--blush);
+    }
+
+    /* ── HOW IT WORKS ─────────────────────────────────────────────────── */
+    .how { background: var(--warm); }
+    .how-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-top: 4rem;
+    }
+    .how-card {
+      background: var(--cream); border-radius: 4px; padding: 2rem;
+      border: 1px solid rgba(200,185,168,0.4);
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .how-card:hover { border-color: var(--terra); transform: translateY(-2px); }
+    .how-num {
+      font-family: var(--font-display); font-size: 2.5rem;
+      font-weight: 300; color: rgba(44,74,62,0.15);
+      line-height: 1; margin-bottom: 1rem;
+    }
+    .how-card-title {
+      font-family: var(--font-display); font-size: 1.1rem;
+      font-weight: 400; color: var(--green); margin-bottom: 0.75rem;
+    }
+    .how-card-body {
+      font-size: 0.85rem; font-weight: 300; line-height: 1.7; color: #6a7d72;
+    }
+
+    /* ── PRICING ──────────────────────────────────────────────────────── */
+    .pricing-inner {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start;
+    }
+    .pricing-main {
+      background: var(--green); border-radius: 4px; padding: 3.5rem;
+    }
+    .pricing-main .section-label { color: var(--blush); opacity: 0.8; }
+    .pricing-main .section-title { color: var(--cream); margin-bottom: 0.5rem; }
+    .price-display {
+      margin: 2rem 0;
+      display: flex; align-items: flex-end; gap: 0.5rem;
+    }
+    .price-big {
+      font-family: var(--font-display); font-size: 5rem;
+      font-weight: 300; color: var(--cream); line-height: 1;
+    }
+    .price-detail {
+      font-size: 0.85rem; font-weight: 300; line-height: 1.4;
+      color: rgba(250,246,241,0.5); padding-bottom: 0.5rem;
+    }
+    .price-note {
+      font-size: 0.8rem; font-weight: 300; font-style: italic;
+      color: rgba(250,246,241,0.5); margin-bottom: 2rem; line-height: 1.6;
+    }
+    .pricing-ctas { display: flex; flex-direction: column; gap: 1rem; }
+    .btn-cream {
+      font-size: 0.72rem; font-weight: 500; letter-spacing: 0.12em;
+      text-transform: uppercase; text-decoration: none;
+      background: var(--cream); color: var(--green);
+      padding: 1rem 2rem; border-radius: 2rem; text-align: center;
+      transition: background 0.2s;
+      display: block;
+    }
+    .btn-cream:hover { background: var(--blush); }
+    .btn-outline-cream {
+      font-size: 0.72rem; font-weight: 500; letter-spacing: 0.12em;
+      text-transform: uppercase; text-decoration: none;
+      border: 1px solid rgba(250,246,241,0.25); color: rgba(250,246,241,0.7);
+      padding: 1rem 2rem; border-radius: 2rem; text-align: center;
+      transition: border-color 0.2s;
+      display: block;
+    }
+    .btn-outline-cream:hover { border-color: var(--blush); color: var(--blush); }
+    .value-breakdown {
+      padding: 2.5rem 0;
+    }
+    .value-title {
+      font-family: var(--font-display); font-size: 1.3rem;
+      font-weight: 400; color: var(--green); margin-bottom: 0.5rem;
+    }
+    .value-subtitle {
+      font-size: 0.8rem; font-weight: 300; color: #6a7d72;
+      margin-bottom: 2rem;
+    }
+    .value-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0.9rem 0; border-bottom: 1px solid rgba(200,185,168,0.3);
+    }
+    .value-row:last-child { border-bottom: 2px solid var(--green); padding-bottom: 1rem; }
+    .value-row-label { font-size: 0.88rem; font-weight: 300; color: #4a5a52; }
+    .value-row-amount { font-family: var(--font-display); font-size: 1.1rem; font-weight: 400; color: var(--green); }
+    .value-total-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1rem 0;
+    }
+    .value-total-label {
+      font-size: 0.75rem; font-weight: 500; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--green);
+    }
+    .value-total-amount {
+      font-family: var(--font-display); font-size: 1.5rem;
+      font-weight: 400; color: var(--terra);
+    }
+    .value-callout {
+      background: var(--warm); border-radius: 4px; padding: 1.2rem 1.5rem;
+      margin-top: 1.5rem; border-left: 3px solid var(--terra);
+    }
+    .value-callout p {
+      font-size: 0.85rem; font-weight: 300; line-height: 1.6; color: #4a5a52;
+    }
+    .value-callout strong { font-weight: 500; color: var(--terra); }
+
+    /* ── MEMBERSHIP CRITERIA ──────────────────────────────────────────── */
+    .criteria { background: var(--warm); }
+    .criteria-inner {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start;
+    }
+    .criteria-col { display: flex; flex-direction: column; gap: 2rem; }
+    .criteria-block {
+      background: var(--cream); border-radius: 4px; padding: 2rem;
+      border: 1px solid rgba(200,185,168,0.3);
+    }
+    .criteria-block-title {
+      font-family: var(--font-display); font-size: 1.1rem;
+      font-weight: 400; color: var(--green); margin-bottom: 1rem;
+    }
+    .criteria-block ul { list-style: none; }
+    .criteria-block li {
+      font-size: 0.88rem; font-weight: 300; line-height: 1.6;
+      color: #4a5a52; padding: 0.5rem 0;
+      border-bottom: 1px solid rgba(200,185,168,0.25);
+      display: flex; align-items: flex-start; gap: 0.75rem;
+    }
+    .criteria-block li:last-child { border-bottom: none; }
+    .criteria-block li::before {
+      content: '';
+      width: 5px; height: 5px; flex-shrink: 0; margin-top: 0.55rem;
+      border-radius: 50%; background: var(--terra);
+    }
+
+    /* ── APPLICATION PROCESS ──────────────────────────────────────────── */
+    .process-steps {
+      display: grid; grid-template-columns: repeat(5, 1fr); gap: 0;
+      margin-top: 4rem; position: relative;
+    }
+    .process-steps::before {
+      content: '';
+      position: absolute; top: 28px; left: 10%; right: 10%;
+      height: 1px; background: var(--taupe);
+    }
+    .process-step { text-align: center; padding: 0 1rem; position: relative; }
+    .step-num {
+      width: 56px; height: 56px; border-radius: 50%;
+      background: var(--cream); border: 1px solid var(--taupe);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 1.2rem;
+      font-family: var(--font-display); font-size: 1.2rem; font-weight: 400;
+      color: var(--terra);
+      position: relative; z-index: 1;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .process-step:hover .step-num { background: var(--terra); border-color: var(--terra); color: var(--cream); }
+    .step-title {
+      font-family: var(--font-display); font-size: 0.95rem;
+      font-weight: 400; color: var(--green); margin-bottom: 0.5rem;
+    }
+    .step-body {
+      font-size: 0.78rem; font-weight: 300; line-height: 1.6; color: #6a7d72;
+    }
+
+    /* ── FINAL CTA ────────────────────────────────────────────────────── */
+    .final-cta {
+      background: var(--terra);
+      text-align: center; padding: 7rem 0;
+    }
+    .final-cta .section-label { color: rgba(250,246,241,0.6); }
+    .final-cta-title {
+      font-family: var(--font-display); font-size: clamp(2.2rem, 4vw, 3.8rem);
+      font-weight: 300; color: var(--cream); line-height: 1.2;
+      margin-bottom: 1.5rem;
+    }
+    .final-cta-body {
+      font-size: 1rem; font-weight: 300; line-height: 1.8;
+      color: rgba(250,246,241,0.75); max-width: 48ch; margin: 0 auto 3rem;
+    }
+    .final-cta-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn-white {
+      font-size: 0.72rem; font-weight: 500; letter-spacing: 0.12em;
+      text-transform: uppercase; text-decoration: none;
+      background: var(--cream); color: var(--terra);
+      padding: 1rem 2.5rem; border-radius: 2rem;
+      transition: background 0.2s;
+      display: inline-block;
+    }
+    .btn-white:hover { background: #f0e9e0; }
+    .btn-outline-white {
+      font-size: 0.72rem; font-weight: 500; letter-spacing: 0.12em;
+      text-transform: uppercase; text-decoration: none;
+      border: 1px solid rgba(250,246,241,0.4); color: var(--cream);
+      padding: 1rem 2.5rem; border-radius: 2rem;
+      transition: border-color 0.2s;
+      display: inline-block;
+    }
+    .btn-outline-white:hover { border-color: var(--cream); }
+
+    /* ── FORM PLACEHOLDER ─────────────────────────────────────────────── */
+    #apply-form {
+      background: var(--cream); padding: 6rem 0;
+    }
+    .form-placeholder {
+      max-width: 600px; margin: 0 auto;
+      border: 2px dashed var(--taupe);
+      border-radius: 4px; padding: 4rem;
+      text-align: center;
+    }
+    .form-placeholder-icon {
+      font-family: var(--font-display); font-size: 3rem;
+      color: var(--taupe); margin-bottom: 1rem;
+    }
+    .form-placeholder-title {
+      font-family: var(--font-display); font-size: 1.5rem;
+      font-weight: 300; color: var(--green); margin-bottom: 0.75rem;
+    }
+    .form-placeholder-body {
+      font-size: 0.85rem; font-weight: 300; line-height: 1.7; color: #6a7d72;
+    }
+
+    /* ── FOOTER ───────────────────────────────────────────────────────── */
+    footer {
+      background: var(--green-dk); padding: 3rem 0;
+    }
+    .footer-inner {
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem;
+    }
+    .footer-logo {
+      font-family: var(--font-display); font-size: 1.2rem; font-weight: 400;
+      color: var(--cream);
+    }
+    .footer-logo span { color: var(--terra); }
+    .footer-note {
+      font-size: 0.72rem; font-weight: 300;
+      color: rgba(250,246,241,0.35); letter-spacing: 0.05em;
+    }
+
+    /* ── RESPONSIVE ───────────────────────────────────────────────────── */
+    @media (max-width: 960px) {
+      nav { padding: 1rem 1.5rem; }
+      .hero { grid-template-columns: 1fr; }
+      .hero-right { min-height: 320px; }
+      .hero-left { padding: 8rem 2rem 4rem; }
+      .what-inner, .who-inner, .founding-inner,
+      .pricing-inner, .criteria-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .what-visual { height: 300px; }
+      .benefits-grid { grid-template-columns: 1fr; }
+      .how-grid { grid-template-columns: 1fr 1fr; }
+      .process-steps { grid-template-columns: 1fr; gap: 2rem; }
+      .process-steps::before { display: none; }
+    }
+    @media (max-width: 600px) {
+      .container { padding: 0 1.25rem; }
+      .how-grid { grid-template-columns: 1fr; }
+      section { padding: 4rem 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">The Sisters'<span> Couch</span></div>
+    <a href="#apply-form" class="nav-pill">Apply Now</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="top">
+    <div class="hero-texture"></div>
+    <div class="hero-left">
+      <div class="hero-badge">
+        <div class="hero-badge-dot"></div>
+        <span>Now Accepting Applications</span>
+      </div>
+      <p class="hero-eyebrow">The Couch Collective</p>
+      <h1 class="hero-title">A private space to <em>rest, return,</em> and belong.</h1>
+      <p class="hero-sub">A private membership for Black women seeking a consistent, safe, and intentional space to rest, connect, and prioritize their wellness.</p>
+      <div class="hero-actions">
+        <a href="#apply-form" class="btn-primary">Apply for Membership</a>
+        <a href="#apply-form" class="btn-ghost">Join the Waitlist</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-right-bg"></div>
+      <div class="hero-right-fill"></div>
+      <div class="hero-ornament">
+        <div class="hero-ring">
+          <div class="hero-ring-text">
+            <strong>10</strong>
+            Founding<br/>Member Spots
+          </div>
+        </div>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <span class="hero-stat-num">$80</span>
+          <span class="hero-stat-label">per month</span>
+        </div>
+        <div class="hero-stat">
+          <span class="hero-stat-num">$300+</span>
+          <span class="hero-stat-label">in monthly value</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT THIS IS -->
+  <section>
+    <div class="container">
+      <div class="what-inner">
+        <div class="what-visual">
+          <div class="what-card what-card-main">
+            <div class="what-card-quote">"A space to work, rest, reflect, and be in community — without pressure or performance."</div>
+            <p class="what-emphasis">The Couch Collective lives inside The Sisters' Couch Healing Hub in Detroit, Michigan — a wellness-centered environment built for Black women, by design.</p>
+          </div>
+          <div class="what-card what-card-accent">
+            <div class="what-card-accent-text">This is not just a place you visit once.<br/><br/>This is a space you return to.</div>
+          </div>
+        </div>
+        <div>
+          <span class="section-label">What This Is</span>
+          <div class="divider"></div>
+          <h2 class="section-title">A space to land,<br/><em>consistently.</em></h2>
+          <p class="section-body">The Couch Collective is a private membership inside The Sisters' Couch designed for Black women who need more than occasional support.</p>
+          <br/>
+          <p class="section-body">This is not a drop-in. This is not a one-time event. This is consistent, recurring access to a space built to hold you — wherever you are in your journey.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHO THIS IS FOR -->
+  <section class="who">
+    <div class="container">
+      <div class="who-inner">
+        <div>
+          <span class="section-label">Who This Is For</span>
+          <div class="divider"></div>
+          <h2 class="section-title">Built for women<br/>who are <em>ready.</em></h2>
+          <ul class="who-list">
+            <li>
+              <div class="who-mark"><svg viewBox="0 0 16 16"><polyline points="3 8 7 12 13 4"/></svg></div>
+              <span class="who-list-text">Black women seeking a consistent space to rest and reset</span>
+            </li>
+            <li>
+              <div class="who-mark"><svg viewBox="0 0 16 16"><polyline points="3 8 7 12 13 4"/></svg></div>
+              <span class="who-list-text">Black women who value intentional community and connection</span>
+            </li>
+            <li>
+              <div class="who-mark"><svg viewBox="0 0 16 16"><polyline points="3 8 7 12 13 4"/></svg></div>
+              <span class="who-list-text">Black women navigating life, work, motherhood, healing, or transition</span>
+            </li>
+            <li>
+              <div class="who-mark"><svg viewBox="0 0 16 16"><polyline points="3 8 7 12 13 4"/></svg></div>
+              <span class="who-list-text">Black women who want access to wellness-centered environments and resources</span>
+            </li>
+            <li>
+              <div class="who-mark"><svg viewBox="0 0 16 16"><polyline points="3 8 7 12 13 4"/></svg></div>
+              <span class="who-list-text">Black women who are ready to be part of something thoughtful and curated</span>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <div class="who-callout">
+            <div class="who-callout-title">Limited to 10 Founding Members.</div>
+            <p class="who-callout-body">This inaugural round is intentionally small. Each member helps shape the culture, experience, and future of The Couch Collective.</p>
+            <div class="spots-indicator">
+              <div class="spot"></div>
+              <div class="spot"></div>
+              <div class="spot"></div>
+              <div class="spot open"></div>
+              <div class="spot open"></div>
+              <div class="spot open"></div>
+              <div class="spot open"></div>
+              <div class="spot open"></div>
+              <div class="spot open"></div>
+              <div class="spot open"></div>
+            </div>
+            <p class="spots-label">Spots filling — apply early</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MEMBERSHIP BENEFITS -->
+  <section>
+    <div class="container">
+      <div class="benefits-header">
+        <span class="section-label">Membership Benefits</span>
+        <div class="divider"></div>
+        <h2 class="section-title">Everything included<br/>in your <em>membership.</em></h2>
+      </div>
+      <div class="benefits-grid">
+        <div class="benefit-group">
+          <span class="benefit-group-label">Access &amp; Experience</span>
+          <div class="benefit-group-title">Events &amp; Priority</div>
+          <ul class="benefit-items">
+            <li>Priority access to event tickets</li>
+            <li>Two members-only events each year</li>
+            <li>Two open community days per week</li>
+          </ul>
+        </div>
+        <div class="benefit-group accent">
+          <span class="benefit-group-label">Space &amp; Amenities</span>
+          <div class="benefit-group-title">Your Home Base</div>
+          <ul class="benefit-items">
+            <li>Wellness lounge access</li>
+            <li>Cozy, calming environment</li>
+            <li>WiFi, tea, snacks, and shared resources</li>
+          </ul>
+        </div>
+        <div class="benefit-group accent">
+          <span class="benefit-group-label">Community &amp; Connection</span>
+          <div class="benefit-group-title">Your Circle</div>
+          <ul class="benefit-items">
+            <li>Access to a curated network of Black women</li>
+            <li>In-house wellness practitioners</li>
+            <li>Private member communication space</li>
+          </ul>
+        </div>
+        <div class="benefit-group">
+          <span class="benefit-group-label">Additional Benefits</span>
+          <div class="benefit-group-title">Member Perks</div>
+          <ul class="benefit-items">
+            <li>20% off space rentals</li>
+            <li>One guest pass per quarter</li>
+            <li>Early access to new programs and offerings</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOUNDING MEMBER -->
+  <section class="founding">
+    <div class="container">
+      <div class="founding-inner">
+        <div>
+          <span class="section-label">Founding Member Experience</span>
+          <div class="divider"></div>
+          <h2 class="section-title">You're not just joining.<br/><em>You're building this.</em></h2>
+          <p class="founding-body">This membership is being built in real time. Founding Members have a direct hand in shaping the culture, rituals, and future of The Couch Collective.</p>
+          <p class="founding-body">You'll have the option to be featured on The Sisters' Couch website as part of our Founding Collective — a permanent acknowledgment of the women who helped create this space.</p>
+          <p class="founding-detail">Because of the trust and early commitment Founding Members bring, you'll receive an exclusive introductory rate that will not be offered to future members.</p>
+        </div>
+        <div>
+          <div class="founding-card">
+            <div class="founding-price"><sub>$</sub>80</div>
+            <p class="founding-price-label">per month · founding member rate</p>
+            <ul class="founding-perks">
+              <li>Exclusive introductory rate — not offered long term</li>
+              <li>Input into culture and community rituals</li>
+              <li>Featured in the Founding Collective on TSC website</li>
+              <li>First access as new offerings are added</li>
+              <li>Over $300 in monthly value included</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="how">
+    <div class="container">
+      <span class="section-label">How You Can Use the Space</span>
+      <div class="divider"></div>
+      <h2 class="section-title">Your membership,<br/><em>your way.</em></h2>
+      <div class="how-grid">
+        <div class="how-card">
+          <div class="how-num">01</div>
+          <div class="how-card-title">Open Community Days</div>
+          <p class="how-card-body">Come in during designated days each week to work, rest, journal, or simply be. No agenda required.</p>
+        </div>
+        <div class="how-card">
+          <div class="how-num">02</div>
+          <div class="how-card-title">Events</div>
+          <p class="how-card-body">Attend public and members-only events designed for connection, learning, and restoration.</p>
+        </div>
+        <div class="how-card">
+          <div class="how-num">03</div>
+          <div class="how-card-title">Personal Use</div>
+          <p class="how-card-body">Use the space as a consistent environment to reset and recharge — on your own terms.</p>
+        </div>
+        <div class="how-card">
+          <div class="how-num">04</div>
+          <div class="how-card-title">Private Rentals</div>
+          <p class="how-card-body">Host your own gatherings or workshops at a 20% member discount rate.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING & VALUE -->
+  <section>
+    <div class="container">
+      <div class="pricing-inner">
+        <div class="pricing-main">
+          <span class="section-label">Membership Investment</span>
+          <h2 class="section-title">Simple, <em>clear</em> pricing.</h2>
+          <div class="price-display">
+            <span class="price-big">$80</span>
+            <span class="price-detail">per month<br/>Founding Member rate</span>
+          </div>
+          <p class="price-note">Limited to 10 members. This introductory rate is exclusive to the founding round and will not be offered to future members.</p>
+          <div class="pricing-ctas">
+            <a href="#apply-form" class="btn-cream">Apply for Membership</a>
+            <a href="#apply-form" class="btn-outline-cream">Join the Waitlist</a>
+          </div>
+        </div>
+        <div class="value-breakdown">
+          <div class="value-title">What You'd Pay Without Membership</div>
+          <div class="value-subtitle">Standard pricing for non-members</div>
+          <div class="value-row">
+            <span class="value-row-label">Drop-in community days</span>
+            <span class="value-row-amount">$10 / visit</span>
+          </div>
+          <div class="value-row">
+            <span class="value-row-label">Events</span>
+            <span class="value-row-amount">$45 – $50</span>
+          </div>
+          <div class="value-row">
+            <span class="value-row-label">Space rental</span>
+            <span class="value-row-amount">$150 / hr (3 hr min)</span>
+          </div>
+          <div class="value-total-row" style="border-top: 1px solid var(--taupe); margin-top: 0.5rem; padding-top: 1rem;">
+            <span style="font-size:0.7rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--green);">Typical Monthly Value</span>
+          </div>
+          <div class="value-row">
+            <span class="value-row-label">Open community days (×8)</span>
+            <span class="value-row-amount">$80</span>
+          </div>
+          <div class="value-row">
+            <span class="value-row-label">Event access</span>
+            <span class="value-row-amount">$50</span>
+          </div>
+          <div class="value-row">
+            <span class="value-row-label">Members-only experiences</span>
+            <span class="value-row-amount">$80</span>
+          </div>
+          <div class="value-row">
+            <span class="value-row-label">Rental savings (20% off)</span>
+            <span class="value-row-amount">$90</span>
+          </div>
+          <div class="value-total-row">
+            <span class="value-total-label">Estimated Total Value</span>
+            <span class="value-total-amount">$300+ / month</span>
+          </div>
+          <div class="value-callout">
+            <p>Members receive over <strong>$300 in monthly value</strong> for $80 as part of the Founding Member experience.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MEMBERSHIP CRITERIA & GUIDELINES -->
+  <section class="criteria">
+    <div class="container">
+      <span class="section-label">Community Standards</span>
+      <div class="divider"></div>
+      <h2 class="section-title">A curated, <em>protected</em> space.</h2>
+      <br/>
+      <div class="criteria-inner">
+        <div>
+          <div class="criteria-block">
+            <div class="criteria-block-title">Membership Criteria</div>
+            <p style="font-size:0.85rem;font-weight:300;color:#6a7d72;line-height:1.7;margin-bottom:1rem;">This membership is intentionally curated to maintain a safe and aligned environment. Members must:</p>
+            <ul>
+              <li>Identify as a Black woman</li>
+              <li>Align with the values of The Sisters' Couch</li>
+              <li>Be committed to contributing to a respectful and supportive space</li>
+            </ul>
+          </div>
+        </div>
+        <div>
+          <div class="criteria-block">
+            <div class="criteria-block-title">Community Guidelines</div>
+            <p style="font-size:0.85rem;font-weight:300;color:#6a7d72;line-height:1.7;margin-bottom:1rem;">To protect the integrity of the space, members agree to:</p>
+            <ul>
+              <li>Respect confidentiality and privacy</li>
+              <li>Contribute to a calm and restorative environment</li>
+              <li>Engage with care, consent, and mutual respect</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- APPLICATION PROCESS -->
+  <section>
+    <div class="container">
+      <span class="section-label">How to Join</span>
+      <div class="divider"></div>
+      <h2 class="section-title">Five steps to <em>membership.</em></h2>
+      <div class="process-steps">
+        <div class="process-step">
+          <div class="step-num">1</div>
+          <div class="step-title">Apply</div>
+          <p class="step-body">Submit your membership application through our online form.</p>
+        </div>
+        <div class="process-step">
+          <div class="step-num">2</div>
+          <div class="step-title">Review</div>
+          <p class="step-body">Applications are reviewed for values and community alignment.</p>
+        </div>
+        <div class="process-step">
+          <div class="step-num">3</div>
+          <div class="step-title">Interview</div>
+          <p class="step-body">Selected applicants receive an invitation to a brief conversation.</p>
+        </div>
+        <div class="process-step">
+          <div class="step-num">4</div>
+          <div class="step-title">Invitation</div>
+          <p class="step-body">Selected members receive a formal invitation to join.</p>
+        </div>
+        <div class="process-step">
+          <div class="step-num">5</div>
+          <div class="step-title">Welcome</div>
+          <p class="step-body">Membership begins upon acceptance and payment confirmation.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FORM PLACEHOLDER -->
+  <section id="apply-form" style="background:var(--warm);padding:6rem 0;">
+    <div class="container">
+      <div class="form-placeholder">
+        <div class="form-placeholder-icon">✦</div>
+        <div class="form-placeholder-title">Application Form</div>
+        <p class="form-placeholder-body">The membership application will live here. When ready, replace this placeholder with the embedded Jotform link or form code. This section anchors the "Apply Now" and "Join the Waitlist" buttons throughout the page.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="final-cta">
+    <div class="container">
+      <span class="section-label">Join The Couch Collective</span>
+      <h2 class="final-cta-title">Only 10 spots.<br/>This is one of them.</h2>
+      <p class="final-cta-body">A limited, intentional membership designed for women who are ready for consistent access to rest, community, and care.</p>
+      <div class="final-cta-actions">
+        <a href="#apply-form" class="btn-white">Apply for Membership</a>
+        <a href="#apply-form" class="btn-outline-white">Join the Waitlist</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-logo">The Sisters'<span> Couch</span></div>
+        <p class="footer-note">The Couch Collective · Detroit, MI · 2200 Hunt Street</p>
+        <p class="footer-note">© 2026 The Sisters' Couch. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
