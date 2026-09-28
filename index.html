@@ -134,7 +134,7 @@
     .gallery-caption { text-align: center; margin-top: 1.5rem; font-size: 0.75rem; font-weight: 300; color: var(--light); letter-spacing: 0.1em; text-transform: uppercase; }
 
     .pricing { padding: 8rem 0; background: var(--cream-dark); }
-    .pricing-cards { display: grid; grid-template-columns: repeat(4,1fr); gap: 1.5px; margin-top: 4rem; border: 1px solid rgba(45,74,45,0.1); background: rgba(45,74,45,0.1); }
+    .pricing-cards { display: grid; grid-template-columns: repeat(2,1fr); gap: 1.5px; max-width: 640px; margin: 4rem auto 0; border: 1px solid rgba(45,74,45,0.1); background: rgba(45,74,45,0.1); }
     .pricing-card { background: var(--cream-dark); padding: 2.5rem 1.75rem; text-align: center; transition: background 0.3s; }
     .pricing-card.featured { background: var(--plum); }
     .pricing-card:hover:not(.featured) { background: var(--cream); }
@@ -291,7 +291,7 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M12 6v6l4 2"/></svg>
           </div>
           <h3 class="suite-card-title">Dedicated Hours</h3>
-          <p class="suite-card-text">Shared between two practitioners on a scheduled basis. Your assigned time is exclusively yours — no interruptions, no overlap.</p>
+          <p class="suite-card-text">Shared between two practitioners on a scheduled basis, with 80 hours per month for each. Your assigned time is exclusively yours — no interruptions, no overlap.</p>
         </div>
         <div class="suite-card reveal">
           <div class="suite-icon">
@@ -366,23 +366,12 @@
         <div class="pricing-card featured">
           <p class="pricing-card-label">Monthly Rate</p>
           <p class="pricing-card-amount">$500</p>
-          <p class="pricing-card-sub">per month<br/>flat rate</p>
-        </div>
-        <div class="pricing-card">
-          <p class="pricing-card-label">First Month</p>
-          <p class="pricing-card-amount">$250</p>
-          <p class="pricing-card-sub">50% introductory<br/>discount</p>
-          <span class="pricing-card-badge">Limited Time</span>
+          <p class="pricing-card-sub">per month<br/>80 hours included</p>
         </div>
         <div class="pricing-card">
           <p class="pricing-card-label">Renewal Rate</p>
           <p class="pricing-card-amount">$550</p>
           <p class="pricing-card-sub">per month<br/>after initial term</p>
-        </div>
-        <div class="pricing-card">
-          <p class="pricing-card-label">Minimum Term</p>
-          <p class="pricing-card-amount">8</p>
-          <p class="pricing-card-sub">months<br/>+ $500 deposit</p>
         </div>
       </div>
       <p class="pricing-note reveal">No revenue split. No hidden fees. A flat rate so you can focus on what you do best.</p>
